@@ -344,6 +344,9 @@ func (c *Config) Serve() error {
 		go c.ingressController.Run(wait.NeverStop)
 	}
 
+	// TODO: we should regular update the pinger
+	//  and kill the old ones
+	SetUpPinger(c.Servers)
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
