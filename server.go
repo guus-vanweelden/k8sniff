@@ -346,7 +346,7 @@ func (c *Config) Serve() error {
 
 	// TODO: we should regular update the pinger
 	//  and kill the old ones
-	SetUpPinger(c.Servers)
+	go SetUpPinger(c.Servers)
 	for {
 		conn, err := listener.Accept()
 		if err != nil {

@@ -1,17 +1,18 @@
 package main
 
 import (
+	"context"
 	"time"
 
 	"github.com/golang/glog"
+	ping "github.com/guus-vanweelden/go-ping"
 	"github.com/kubermatic/k8sniff/metrics"
-	ping "github.com/sparrc/go-ping"
 )
 
 // SetUpPinger creates a bunch of pinger fo a list of servers
 func SetUpPinger(servers []Server) {
 	for _, s := range servers {
-		p, err := ping.NewPinger(s.Host)
+		p, err := ping.NewPinger(context.Background(), s.Host)
 		if err != nil {
 			glog.V(5).Infof("Could not setup a pinger for host=%s: %s", s.Host, err)
 			continue
